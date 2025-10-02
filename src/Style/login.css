@@ -1,0 +1,96 @@
+.login .split {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ---LEFT SIDE CONTENT STYLE--- */
+.login .split .left-side{
+    width: 52%;
+    background: var(--primary-color);
+    border-radius: 16px;
+    padding: 94px 24px;
+    height: 50.5vw;
+}
+
+/* ---Logo--- */
+.login .split .left-side .logo{
+    width: 30%;
+    margin: 0 auto;
+    display: block;
+}
+
+/* ---Heading--- */
+.login .split .left-side .heading{
+    color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-top: -10px;
+    text-shadow: 0px 1px 7px rgba(0,0,0,0.6);
+}
+.login .split .left-side p{
+    color: #fff;
+    font-size: 20px;
+    margin-top: 40px;
+}
+
+
+/* ---RIGHT SIDE CONTENT STYLE--- */
+.login .split .right-side{
+    width: 45%;
+}
+.login .split .right-side .logo{
+    width: 30%;
+    margin: 35px auto;
+    display: block;
+}
+.login .split .right-side h4{
+    text-align: center;
+    color: #6c6868;
+    margin-top: -37px;
+    width: 100%;
+    font-size: 30px !important;
+}
+.login .split .right-side h5{
+    margin-top: 60px;
+    font-weight: 400;
+}
+
+/* ---Form--- */
+.login .split .right-side .form-container label{
+    color: #3B3B3B;
+}
+
+.login .split .right-side .form-container .form-grp{
+    width: 90%;
+    padding: 10px 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(213, 206, 206);
+    margin: 0;
+}
+.login .split .right-side .form-container .form-grp-2 input{
+    width: 83%;
+}
+
+.login .split .right-side .form-container input{
+    width: 92%;
+    /* padding: 7px 8px; */
+    /* border-radius: 5px; */
+    border: none;
+}
+.login .split .right-side .form-container input:focus{
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.login .split .right-side .form-container button{
+    margin-top: 60px;
+    width: 90%;
+    padding:10px 16px !important;
+    background: var(--primary-color);
+}
+.login .split .right-side .form-container button:hover{
+    color: var(--primary-color);
+    background: none;
+    border: 2px solid var(--primary-color);
+}

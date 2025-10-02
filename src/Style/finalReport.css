@@ -1,0 +1,241 @@
+/* ---BLOOD TEST--- */
+.blood-test .report-container{
+    padding: 40px 24px;
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+.blood-test .report-container .print-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.blood-test .report-container .print-header .logo-container{
+    width: 15%;
+}
+.blood-test .report-container .print-header .logo-container img{
+    width: 100%;
+}
+.blood-test .report-container .print-header .text-container h1{
+    color: rgb(57, 57, 57);
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 45px;
+    /* margin-left: -45px; */
+}
+/* .blood-test .report-container .header .text-container h1 , p{
+    margin-left: -30px;
+} */
+.blood-test .report-container .report table input{
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+
+/* .blood-test {
+  font-family: 'Arial', sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 15px;
+}
+
+.logo-container img {
+  height: 100px;
+}
+
+.text-container {
+  text-align: center;
+}
+
+.text-container h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.text-container p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+.patient-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.left-side-table, 
+.right-side-table {
+  width: 48%;
+  border-collapse: collapse;
+}
+
+.left-side-table th, 
+.left-side-table td,
+.right-side-table th, 
+.right-side-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.section-header {
+  text-align: center;
+  background: #eee;
+  padding: 8px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table th, 
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.test-header {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.normal-ranges {
+  width: 100%;
+  border: none;
+  resize: none;
+  background: transparent;
+}
+
+.remarks-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.action-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.custom-btn {
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-outline {
+  background: white;
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.btn-fill {
+  background: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+} */
+
+
+
+
+.patient-info-table th,
+.patient-info-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  vertical-align: top;
+  text-align: left;
+  word-break: break-word;
+}
+
+.patient-info-table th {
+  background-color: #f2f2f2;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+/* .tests-required {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.4;
+} */
+ .tests-required:hover {
+  cursor: grab;
+}
+
+h4{
+  width: 136%;
+  font-size: 20px !important;
+ }
+
+
+
+ @media screen and (max-width: 1200px) {
+
+  .patient-info-table {
+    margin-left: 49px !important;
+  }
+}
+
+
+@media screen and (max-width: 700px) {
+  .patient-info {
+    flex-direction: column;
+  }
+
+  .patient-info-table {
+    width: 100% !important;
+  }
+}
+
+@media print {
+  .print-header{
+    position: fixed;
+  }
+
+  .print-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 20px 0;
+    /* border-bottom: 1px solid #000; */
+    z-index: 1000;
+    text-align: center;
+  }
+
+ .patient-info{
+  margin-top: 140px !important;
+ }
+
+  .action-btns {
+    display: none !important; /* Hide buttons on print */
+  }
+}

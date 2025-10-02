@@ -1,0 +1,35 @@
+/* ---DAHBOARD--- */
+.dashboard-container{
+    width: 78%;
+    float: right;
+}
+
+/* ---DASHBOARD CONTENT--- */
+.dashboard-container .dashboard-content{
+    width: 100%;
+}
+/* Dashboard analatics carts container */
+.dashboard-container .dashboard-content .analatics-carts{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+/* Dashboard analatics carts */
+.dashboard-container .dashboard-content .analatics-carts .cart{
+    width: 32%;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dashboard-container .dashboard-content .analatics-carts .cart img{
+    width: 80%;
+}
+
+/* ---EARNINGS CONTAINER--- */
+.dashboard-container .dashboard-content .earnings-container .header{
+    display: flex;
+    justify-content: space-between;
+}

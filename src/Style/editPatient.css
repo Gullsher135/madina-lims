@@ -1,0 +1,226 @@
+/* ---edit NEW PATIENT--- */
+.edit-patient-container{
+    width: 78%;
+    float: right;
+    position: relative;
+}
+
+.display {
+    width: 100%;
+    height: 100vw;
+    position: fixed;
+    z-index: 1;
+    background: #000;
+    opacity: 30%;
+    top: 0;
+    display: none;
+  }
+
+.edit-patient-container form .form-grp{
+    width: 100%;
+}
+.edit-patient-container form .form-grp input{
+    width: 50%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    outline: 1px solid #ccc;
+}
+/* LOADER */
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: #333;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .page-item {
+    list-style: none;
+    margin: 0 5px;
+  }
+  
+  .page-item button {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--primary-color);
+  }
+  
+  .page-item button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .page-item button:focus {
+    outline: none;
+  }
+  
+  .page-item.active button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+  }
+  
+
+/* ---TEST TYPE */
+.edit-patient-container .test-type .drop-down-btn{
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    outline: 1px solid #ccc;
+    background: #f5f5f5;
+    cursor: pointer;
+}
+.edit-patient-container .test-type .drop-down-btn p , .icon{
+    color: #7b7979;
+}
+.edit-patient-container .test-type .drop-down-container{
+    display: none;
+}
+.edit-patient-container .test-type .drop-down-container.active{
+    display: block;
+}
+.edit-patient-container .test-type .drop-down-content{
+    width: 100%;
+}
+
+.edit-patient-container .test-type .drop-down-content select{
+    width: 45%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    outline: 1px solid #ccc;
+    color: #7b7979;
+}
+
+
+.edit-patient-container .test-type .drop-down-content .edit-test-btn{
+    width: 49%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    outline: 1px solid #ccc;
+    color: #7b7979;
+    height: 40px;
+    transition: all .2s ease;
+}
+.edit-patient-container .test-type .drop-down-content .edit-test-btn:hover{
+    background: #ccc;
+    color: #fff;
+}
+
+
+/* ---PATIENTS--- */
+/* ---TESTS--- */
+.patients-container{
+    width: 78%;
+    float: right;
+    position: relative;
+}
+
+.patients-container .patients-content .actions .search input{
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.patients-container .patients-content .actions .search input:focus{
+    border: 1px solid #ccc;
+}
+.patients-container .patients-content .actions .search .search-icon{
+    background-color: var(--primary-color);
+    padding: 8px 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.patients-container .patients-content table{
+    position: relative;
+}
+.patients-container .patients-content table tr {
+    position: relative; /* Position relative to the row */
+  }
+  
+  .patients-container .patients-content table .actions-container {
+    background: #f4f4f4;
+    border-radius: 8px;
+    padding: 8px;
+    position: absolute;
+    top: 100%; 
+    right: 0;  
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 100; 
+  }
+  
+  .patients-container .patients-content table .actions-container.active {
+    display: block;
+  }
+.patients-container .patients-content table .actions-container button{
+    background: none;
+    border: none;
+    margin-top: 10px;
+    transition: all .2s ease;
+}
+.patients-container .patients-content table .actions-container button.get-report:hover{
+    color: green;
+}
+.patients-container .patients-content table .actions-container button.edit:hover{
+    color: rgb(150, 150, 4);
+}
+.patients-container .patients-content table .actions-container button.delete:hover{
+    color: red;
+}
+
+/* ---SUCCESS MESSAGE MODAL--- */
+.patients-container .success-message {
+    padding: 12px;
+    border-radius: 16px;
+    background: #fff;
+    width: 35%;
+    position: fixed;
+    z-index: 1;
+    top: 15rem;
+    left: 30rem;
+    display: none;
+  }
+  .patients-container .success-message.active {
+    display: block;
+  }
+  .patients-container .success-message .close-icon {
+    float: right;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .patients-container .success-message .close-icon:hover {
+    color: red;
+  }
+  .patients-container .success-message .modal-content {
+    padding: 28px 16px;
+    padding-bottom: 48px;
+  }
+  
+  .patients-container .success-message .modal-content .success-img {
+    width: 16%;
+    margin: 0px auto;
+    display: block;
+  }
+
+  .add-test-btn{
+    color: #fff;
+    background: var(--primary-color);
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  

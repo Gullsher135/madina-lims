@@ -1,0 +1,241 @@
+/* ---TESTS--- */
+.test-type-container {
+  width: 78%;
+  float: right;
+  position: relative;
+}
+
+.display {
+  width: 100%;
+  height: 100vw;
+  position: fixed;
+  z-index: 1;
+  background: #000;
+  opacity: 30%;
+  top: 0;
+  display: none;
+}
+
+.display.active {
+  display: block;
+}
+
+.test-type-container .test-type-content .actions .search input {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.test-type-container .test-type-content .actions .search input:focus {
+  border: 1px solid #ccc;
+}
+.test-type-container .test-type-content .actions .search .search-icon {
+  background-color: var(--primary-color);
+  padding: 8px 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.test-type-container .test-type-content .action-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  background: grey;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  position: absolute;
+  right: 1rem;
+  top: 4.8rem;
+  display: none;
+}
+.test-type-container .test-type-content .delete {
+  transition: all 0.2s ease;
+}
+.test-type-container .test-type-content .delete:hover {
+  color: red;
+}
+.test-type-container .test-type-content .edit:hover {
+  color: green;
+}
+.test-type-container .test-type-content .action-dropdown.active {
+  display: block;
+}
+.test-type-container .test-type-content .action-dropdown button {
+  background: none;
+  border: none;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+}
+.test-type-container .test-type-content .action-dropdown button.edit:hover {
+  color: green;
+}
+.test-type-container
+  .test-type-content
+  .action-dropdown
+  button.get-report:hover {
+  color: var(--primary-color);
+}
+.test-type-container .test-type-content .action-dropdown button.delete:hover {
+  color: red;
+}
+
+
+/* ---SUCCESS MESSAGE MODAL--- */
+.test-type-container .success-message {
+  padding: 12px;
+  border-radius: 16px;
+  background: #fff;
+  width: 35%;
+  position: fixed;
+  z-index: 1;
+  top: 15rem;
+  left: 30rem;
+  display: none;
+}
+.test-type-container .success-message.active {
+  display: block;
+}
+.test-type-container .success-message .close-icon {
+  float: right;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.test-type-container .success-message .close-icon:hover {
+  color: red;
+}
+.test-type-container .success-message .modal-content {
+  padding: 28px 16px;
+  padding-bottom: 48px;
+}
+
+.test-type-container .success-message .modal-content .success-img {
+  width: 16%;
+  margin: 0px auto;
+  display: block;
+}
+
+
+/* ---DELETE SUCCESS MESSAGE MODAL--- */
+.test-type-container .dlt-success-message {
+  padding: 12px;
+  border-radius: 16px;
+  background: #fff;
+  width: 35%;
+  position: fixed;
+  z-index: 1;
+  top: 15rem;
+  left: 30rem;
+  display: none;
+}
+.test-type-container .dlt-success-message.active {
+  display: block;
+}
+.test-type-container .dlt-success-message .close-icon {
+  float: right;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.test-type-container .dlt-success-message .close-icon:hover {
+  color: red;
+}
+.test-type-container .dlt-success-message .modal-content {
+  padding: 28px 16px;
+  padding-bottom: 48px;
+}
+
+.test-type-container .dlt-success-message .modal-content .success-img {
+  width: 16%;
+  margin: 0px auto;
+  display: block;
+}
+
+/* ---DELETE confirmation MODAL--- */
+.test-type-container .delete-confirmation {
+  padding: 12px;
+  border-radius: 16px;
+  background: #fff;
+  width: 35%;
+  position: fixed;
+  z-index: 1;
+  top: 11rem;
+  left: 30rem;
+  display: none;
+}
+.test-type-container .delete-confirmation.active {
+  display: block;
+}
+.test-type-container .delete-confirmation .modal-content {
+  padding: 28px 16px;
+  padding-bottom: 48px;
+}
+.test-type-container .delete-confirmation .modal-content .dlt-icon {
+  font-size: 70px;
+  margin: 0px auto;
+  display: block;
+   color: red;
+}
+.test-type-container .delete-confirmation .modal-content p{
+  color: #777373;
+  font-size: 15px;
+}
+.test-type-container .delete-confirmation .modal-content .actions-btn{
+  display: flex;
+  justify-content: space-between;
+}
+.test-type-container .delete-confirmation .modal-content .actions-btn button{
+  width: 48%;
+}
+.test-type-container .delete-confirmation .modal-content .actions-btn button.cancel-btn{
+  background: #777373;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.test-type-container .delete-confirmation .modal-content .actions-btn button.cancel-btn:hover{
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* ---ADD NEW TEST TYPE--- */
+.add-test-type-container {
+  width: 78%;
+  float: right;
+  position: relative;
+}
+.add-test-type-container form .form-grp {
+  width: 100%;
+}
+.add-test-type-container form .form-grp input,
+select , textarea{
+  width: 45%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  outline: 1px solid #ccc;
+  color: #777373;
+}
+.add-test-type-container .preview table input {
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: none;
+  outline: 1px solid #ccc;
+}
+.add-test-type-container .preview table input:focus{
+    outline: 1px solid #000;
+}
+.add-test-type-container .preview  .btn {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    outline: 1px solid #ccc;
+    color: #7b7979;
+    height: 40px;
+    transition: all .2s ease;
+}
+
+.add-test-type-container .preview  .btn:hover{
+    background: #ccc;
+    color: #fff;
+}

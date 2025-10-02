@@ -1,0 +1,48 @@
+@media screen and (max-width: 1030px){
+    .login .split .left-side{
+        height: 61vw !important;
+    }
+    .login .split .left-side p{
+        margin-top: 60px;
+    }
+    .sidebar .logo-container h5{
+        font-size: 18px !important;
+    }
+}
+
+@media print {
+    body * {
+      visibility: hidden;
+    }
+  
+    .report-container, .report-container * {
+      visibility: visible;
+    }
+  
+    .report-container {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100% !important;
+      border: none;
+      margin: 0;
+      padding: 0;
+      border: 1px solid #fff !important;
+    }
+    .report-container .report table td , tr th{
+        font-size: 20px;
+    }
+    .blood-test .report-container .header .logo-container{
+      width: 14% !important;
+  }
+  .blood-test .report-container .header .logo-container img{
+      width: 100%;
+  }
+  .blood-test .report-container .header .text-container h1{
+      font-size: 60px !important;
+  }
+  .blood-test .report-container .header .text-container p {
+    font-size: 19.5px !important;
+  }
+  }
+  

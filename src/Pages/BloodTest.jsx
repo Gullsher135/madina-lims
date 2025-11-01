@@ -251,237 +251,101 @@ const BloodTest = () => {
           </tbody>
         </table>
 
-        <div className="report" style={{ marginTop: "50px" }}>
-          <table
-            className="table mt-3"
-            style={{ tableLayout: "fixed", width: "100%" }}
-          >
-            <colgroup>
-              <col style={{ width: "30%" }} /> {/* Test Name */}
-              <col style={{ width: "20%" }} /> {/* Result */}
-              <col style={{ width: "10%" }} /> {/* Unit */}
-              <col style={{ width: "40%" }} /> {/* Normal Ranges */}
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Test Name</th>
-                <th>Result</th>
-                <th>Unit</th>
-                <th>Normal Ranges</th>
+       <div className="report" style={{ marginTop: "50px" }}>
+  {tests.map((test, testIndex) => (
+    <table
+      key={testIndex}
+      className="test-section"
+      style={{
+        width: "100%",
+        borderCollapse: "collapse",
+        marginBottom: "20px",
+      }}
+    >
+      <thead>
+        <tr>
+          <th colSpan="4" className="test-header">
+            {test.mainTestName}
+          </th>
+        </tr>
+        <tr>
+          <th>Test Name</th>
+          <th>Result</th>
+          <th>Unit</th>
+          <th>Normal Ranges</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {test.subTests ? (
+          test.subTests.map((item, subIndex) => {
+            const key = `${testIndex}-${subIndex}`;
+            return (
+              <tr key={key}>
+                <td>{item.subTestName}</td>
+                <td>
+                  <input
+                    type="text"
+                    value={results[key] || ""}
+                    onChange={(e) => handleResultChange(e, key)}
+                  />
+                </td>
+                <td>{item.testUnit || ""}</td>
+                <td>{item.testNormalRanges || ""}</td>
               </tr>
-            </thead>
-            <tbody>
-              {tests.map((test, testIndex) => (
-                <React.Fragment key={testIndex}>
-                  <tr>
-                    <th colSpan="4" className="test-header">
-                      {test.mainTestName}
-                    </th>
-                  </tr>
+            );
+          })
+        ) : test.subTestNames ? (
+          test.subTestNames.map((subTest, subIndex) => (
+            <tr key={subIndex}>
+              <td>{subTest}</td>
+              <td>
+                <input
+                  type="text"
+                  value={results[`${testIndex}-${subIndex}`] || ""}
+                  onChange={(e) =>
+                    handleResultChange(e, `${testIndex}-${subIndex}`)
+                  }
+                />
+              </td>
+              <td>{test.unit?.[subIndex] || ""}</td>
+              <td>{test.normalRanges?.[subIndex] || ""}</td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td>{test.mainTestName}</td>
+            <td>
+              <input
+                type="text"
+                value={results[`${testIndex}-0`] || ""}
+                onChange={(e) => handleResultChange(e, `${testIndex}-0`)}
+              />
+            </td>
+            <td>{test.unit || ""}</td>
+            <td>{test.normalRanges || ""}</td>
+          </tr>
+        )}
 
-                  {test.subTests ? (
-                    (() => {
-                      const showHeaders = shouldShowExamHeaders(test);
-                      const groups = {};
+        {remarks && (
+          <tr>
+            <td>
+              <b>Remarks</b>
+            </td>
+            <td colSpan="3">
+              <textarea className="remarks-input" style={{ width: "100%" }} />
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  ))}
 
-                      if (showHeaders) {
-                        test.subTests.forEach((subTest, originalIndex) => {
-                          const type = subTest.examType || "general";
-                          if (!groups[type]) groups[type] = [];
-                          groups[type].push({ ...subTest, originalIndex });
-                        });
-                      }
+  <h6 className="text-center mt-5">
+    Al-Madina Clinic Sharjeel Medical Complex Near Moti Masjid Kohat Cantt
+  </h6>
+</div>
 
-                      return showHeaders
-                        ? examTypeOrder.map((examType) => {
-                            const group = groups[examType];
-                            return (
-                              group?.length > 0 && (
-                                <React.Fragment key={examType}>
-                                  <tr>
-                                    <h4
-                                      colSpan="4"
-                                      className="exam-type-header"
-                                    >
-                                      {formatExamType(examType)}
-                                    </h4>
-                                  </tr>
-                                  {group.map((item) => {
-                                    const key = `${testIndex}-${item.originalIndex}`;
-                                    return (
-                                      <tr key={key}>
-                                        <td style={{ wordBreak: "break-word" }}>
-                                          {item.subTestName}
-                                        </td>
-                                        <td style={{ padding: "0" }}>
-                                          <input
-                                            type="text"
-                                            placeholder="result"
-                                            value={results[key] || ""}
-                                            onChange={(e) =>
-                                              handleResultChange(e, key)
-                                            }
-                                            style={{
-                                              width: "100%",
-                                              boxSizing: "border-box",
-                                            }}
-                                          />
-                                        </td>
-                                        <td
-                                          style={{
-                                            wordBreak: "break-word",
-                                            fontSize: "0.9em",
-                                          }}
-                                        >
-                                          {item.testUnit || ""}
-                                        </td>
-                                        <td
-                                          style={{
-                                            wordBreak: "break-word",
-                                            fontSize: "0.9em",
-                                          }}
-                                        >
-                                          {renderNormalRanges(
-                                            item.testNormalRanges
-                                          )}
-                                        </td>
-                                      </tr>
-                                    );
-                                  })}
-                                </React.Fragment>
-                              )
-                            );
-                          })
-                        : test.subTests.map((item, originalIndex) => {
-                            const key = `${testIndex}-${originalIndex}`;
-                            return (
-                              <tr key={key}>
-                                <td style={{ wordBreak: "break-word" }}>
-                                  {item.subTestName}
-                                </td>
-                                <td style={{ padding: "0" }}>
-                                  <input
-                                    type="text"
-                                    placeholder="result"
-                                    value={results[key] || ""}
-                                    onChange={(e) => handleResultChange(e, key)}
-                                    style={{
-                                      width: "100%",
-                                      boxSizing: "border-box",
-                                    }}
-                                  />
-                                </td>
-                                <td
-                                  style={{
-                                    wordBreak: "break-word",
-                                    fontSize: "0.9em",
-                                  }}
-                                >
-                                  {item.testUnit || ""}
-                                </td>
-                                <td
-                                  style={{
-                                    wordBreak: "break-word",
-                                    fontSize: "0.9em",
-                                  }}
-                                >
-                                  {renderNormalRanges(item.testNormalRanges)}
-                                </td>
-                              </tr>
-                            );
-                          });
-                    })()
-                  ) : test.subTestNames ? (
-                    test.subTestNames.map((subTest, subIndex) => (
-                      <tr key={subIndex}>
-                        <td style={{ wordBreak: "break-word" }}>{subTest}</td>
-                        <td style={{ padding: "0" }}>
-                          <input
-                            type="text"
-                            placeholder="result"
-                            value={results[`${testIndex}-${subIndex}`] || ""}
-                            onChange={(e) =>
-                              handleResultChange(e, `${testIndex}-${subIndex}`)
-                            }
-                            style={{ width: "100%", boxSizing: "border-box" }}
-                          />
-                        </td>
-                        <td
-                          style={{
-                            wordBreak: "break-word",
-                            fontSize: "0.9em",
-                          }}
-                        >
-                          {test.unit?.[subIndex] || ""}
-                        </td>
-                        <td
-                          style={{
-                            wordBreak: "break-word",
-                            fontSize: "0.9em",
-                          }}
-                        >
-                          {renderNormalRanges(test.normalRanges?.[subIndex])}
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td style={{ wordBreak: "break-word" }}>
-                        {test.mainTestName}
-                      </td>
-                      <td style={{ padding: "0" }}>
-                        <input
-                          type="text"
-                          placeholder="result"
-                          value={results[`${testIndex}-0`] || ""}
-                          onChange={(e) =>
-                            handleResultChange(e, `${testIndex}-0`)
-                          }
-                          style={{ width: "100%", boxSizing: "border-box" }}
-                        />
-                      </td>
-                      <td
-                        style={{
-                          wordBreak: "break-word",
-                          fontSize: "0.9em",
-                        }}
-                      >
-                        {test.unit || ""}
-                      </td>
-                      <td
-                        style={{
-                          wordBreak: "break-word",
-                          fontSize: "0.9em",
-                        }}
-                      >
-                        {renderNormalRanges(test.normalRanges)}
-                      </td>
-                    </tr>
-                  )}
-
-                  {remarks && (
-                    <tr>
-                      <td>
-                        <b>Remarks</b>
-                      </td>
-                      <td colSpan="3">
-                        <textarea
-                          className="remarks-input"
-                          style={{ width: "100%" }}
-                        />
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-
-          <h6 className="text-center mt-5">
-            Al-Madina Clinic Sharjeel Medical Complex Near Moti Masjid Kohat
-            Cantt
-          </h6>
-        </div>
       </div>
     </div>
   );

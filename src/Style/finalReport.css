@@ -27,7 +27,7 @@
     margin-left: -30px;
 } */
 .blood-test .report-container .report table input{
-    border: none;
+    border: 1px solid grey;
     padding: 8px 14px;
     border-radius: 8px;
 }
@@ -196,12 +196,6 @@ h4{
 
 
 
- @media screen and (max-width: 1200px) {
-
-  .patient-info-table {
-    margin-left: 49px !important;
-  }
-}
 
 
 @media screen and (max-width: 700px) {
@@ -239,3 +233,33 @@ h4{
     display: none !important; /* Hide buttons on print */
   }
 }
+
+@media print {
+  
+  .test-section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    width: 100% !important;
+  }
+
+  table, tr, td, th {
+    page-break-inside: avoid !important;
+  }
+
+  .report {
+    width: 100% !important;
+  }
+
+  .action-btns {
+    display: none !important;
+  }
+
+  .report-container {
+    border: none !important;
+    width: 100% !important;
+  }
+  .blood-test .report-container .report table input{
+    border: none !important;
+}
+}
+

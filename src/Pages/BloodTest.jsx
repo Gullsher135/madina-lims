@@ -85,6 +85,58 @@ const BloodTest = () => {
       .catch((error) => console.error("Error:", error));
   };
 
+  // Function to determine if we should show unit and normal ranges columns
+  const shouldShowUnitAndRanges = (test) => {
+    // For tests with subTests (detailed or physical templates)
+    if (test.subTests) {
+      // Check if any subTest has unit or normal ranges data
+      return test.subTests.some(
+        (subTest) => subTest.testUnit || subTest.testNormalRanges
+      );
+    }
+    // For tests with subTestNames (detailed template)
+    if (test.subTestNames) {
+      // Check if there are units or normal ranges arrays with data
+      return (
+        (test.unit && test.unit.some((u) => u)) ||
+        (test.normalRanges && test.normalRanges.some((nr) => nr))
+      );
+    }
+    // For single tests
+    return test.unit || test.normalRanges;
+  };
+
+  // Function to group tests by examType for physical template in specific order
+  const groupTestsByExamType = (subTests) => {
+    const groups = {};
+    subTests.forEach((subTest) => {
+      const examType = subTest.examType || "general";
+      if (!groups[examType]) {
+        groups[examType] = [];
+      }
+      groups[examType].push(subTest);
+    });
+    
+    // Return groups in specific order: Physical → Chemical → Microscopic → others
+    const orderedGroups = {};
+    const order = ['physical', 'chemical', 'microscopic'];
+    
+    order.forEach(examType => {
+      if (groups[examType]) {
+        orderedGroups[examType] = groups[examType];
+      }
+    });
+    
+    // Add any other exam types that weren't in the specified order
+    Object.keys(groups).forEach(examType => {
+      if (!order.includes(examType)) {
+        orderedGroups[examType] = groups[examType];
+      }
+    });
+    
+    return orderedGroups;
+  };
+
   if (!patientData) {
     return <div>Loading...</div>;
   }
@@ -115,12 +167,10 @@ const BloodTest = () => {
       </div>
 
       <div className="report-container">
-        {/* ---------------- Report Table with Repeating Header ---------------- */}
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr>
               <td>
-                {/* ---------------- Header (Logo + Title) ---------------- */}
                 <div className="print-header">
                   <div className="logo-container">
                     <img src={Logo} alt="Logo" />
@@ -134,8 +184,6 @@ const BloodTest = () => {
                   </div>
                 </div>
 
-                {/* ---------------- Patient Info Table ---------------- */}
-                {/* ---------------- Patient Info + Investigations ---------------- */}
                 <div
                   className="patient-info"
                   style={{
@@ -176,8 +224,8 @@ const BloodTest = () => {
                         <td
                           colSpan={3}
                           style={{
-                            whiteSpace: "normal", // allow text to wrap
-                            wordBreak: "break-word", // break long test names if needed
+                            whiteSpace: "normal",
+                            wordBreak: "break-word",
                             lineHeight: "1.4",
                           }}
                         >
@@ -192,106 +240,155 @@ const BloodTest = () => {
           </thead>
 
           <tbody>
-            {tests.map((test, testIndex) => (
-              <tr key={testIndex}>
-                <td>
-                  <table
-                    className="test-section"
-                    style={{
-                      width: "100%",
-                      borderCollapse: "collapse",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <thead>
-                      <tr>
-                        <th colSpan="4" className="test-header">
-                          {test.mainTestName}
-                        </th>
-                      </tr>
-                      <tr>
-                        <th>Test Name</th>
-                        <th>Result</th>
-                        <th>Unit</th>
-                        <th>Normal Ranges</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {test.subTests ? (
-                        test.subTests.map((item, subIndex) => {
-                          const key = `${testIndex}-${subIndex}`;
-                          return (
-                            <tr key={key}>
-                              <td>{item.subTestName}</td>
+            {tests.map((test, testIndex) => {
+              const showUnitAndRanges = shouldShowUnitAndRanges(test);
+              const isPhysicalTemplate = test.subTests && test.subTests.some(
+                subTest => subTest.examType && subTest.examType !== "general"
+              );
+
+              return (
+                <tr key={testIndex}>
+                  <td>
+                    <table
+                      className="test-section"
+                      style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      <thead>
+                        <tr>
+                          <th 
+                            colSpan={showUnitAndRanges ? "4" : "2"} 
+                            className="test-header"
+                          >
+                            {test.mainTestName}
+                          </th>
+                        </tr>
+                        <tr>
+                          <th>Test Name</th>
+                          <th>Result</th>
+                          {showUnitAndRanges && <th>Unit</th>}
+                          {showUnitAndRanges && <th>Normal Ranges</th>}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {/* Physical Template with examType grouping */}
+                        {isPhysicalTemplate ? (
+                          Object.entries(groupTestsByExamType(test.subTests)).map(([examType, subTestsInGroup]) => (
+                            <React.Fragment key={examType}>
+                              <tr>
+                                <td 
+                                  colSpan={showUnitAndRanges ? "4" : "2"} 
+                                  style={{ 
+                                    fontWeight: "bold", 
+                                    backgroundColor: "#f5f5f5",
+                                    padding: "8px"
+                                  }}
+                                >
+                                  {examType.toUpperCase()} EXAMINATION
+                                </td>
+                              </tr>
+                              {subTestsInGroup.map((item, subIndex) => {
+                                const originalIndex = test.subTests.indexOf(item);
+                                const key = `${testIndex}-${originalIndex}`;
+                                return (
+                                  <tr key={key}>
+                                    <td>{item.subTestName}</td>
+                                    <td>
+                                      <input
+                                        type="text"
+                                        value={results[key] || ""}
+                                        onChange={(e) => handleResultChange(e, key)}
+                                      />
+                                    </td>
+                                    {showUnitAndRanges && <td>{item.testUnit || ""}</td>}
+                                    {showUnitAndRanges && <td>{item.testNormalRanges || ""}</td>}
+                                  </tr>
+                                );
+                              })}
+                            </React.Fragment>
+                          ))
+                        ) : test.subTests ? (
+                          // Detailed Template with subTests
+                          test.subTests.map((item, subIndex) => {
+                            const key = `${testIndex}-${subIndex}`;
+                            return (
+                              <tr key={key}>
+                                <td>{item.subTestName}</td>
+                                <td>
+                                  <input
+                                    type="text"
+                                    value={results[key] || ""}
+                                    onChange={(e) => handleResultChange(e, key)}
+                                  />
+                                </td>
+                                {showUnitAndRanges && <td>{item.testUnit || ""}</td>}
+                                {showUnitAndRanges && <td>{item.testNormalRanges || ""}</td>}
+                              </tr>
+                            );
+                          })
+                        ) : test.subTestNames ? (
+                          // Detailed Template with subTestNames
+                          test.subTestNames.map((subTest, subIndex) => (
+                            <tr key={subIndex}>
+                              <td>{subTest}</td>
                               <td>
                                 <input
                                   type="text"
-                                  value={results[key] || ""}
-                                  onChange={(e) => handleResultChange(e, key)}
+                                  value={
+                                    results[`${testIndex}-${subIndex}`] || ""
+                                  }
+                                  onChange={(e) =>
+                                    handleResultChange(
+                                      e,
+                                      `${testIndex}-${subIndex}`
+                                    )
+                                  }
                                 />
                               </td>
-                              <td>{item.testUnit || ""}</td>
-                              <td>{item.testNormalRanges || ""}</td>
+                              {showUnitAndRanges && <td>{test.unit?.[subIndex] || ""}</td>}
+                              {showUnitAndRanges && <td>{test.normalRanges?.[subIndex] || ""}</td>}
                             </tr>
-                          );
-                        })
-                      ) : test.subTestNames ? (
-                        test.subTestNames.map((subTest, subIndex) => (
-                          <tr key={subIndex}>
-                            <td>{subTest}</td>
+                          ))
+                        ) : (
+                          // Simple Template (single test)
+                          <tr>
+                            <td>{test.mainTestName}</td>
                             <td>
                               <input
                                 type="text"
-                                value={
-                                  results[`${testIndex}-${subIndex}`] || ""
-                                }
+                                value={results[`${testIndex}-0`] || ""}
                                 onChange={(e) =>
-                                  handleResultChange(
-                                    e,
-                                    `${testIndex}-${subIndex}`
-                                  )
+                                  handleResultChange(e, `${testIndex}-0`)
                                 }
                               />
                             </td>
-                            <td>{test.unit?.[subIndex] || ""}</td>
-                            <td>{test.normalRanges?.[subIndex] || ""}</td>
+                            {showUnitAndRanges && <td>{test.unit || ""}</td>}
+                            {showUnitAndRanges && <td>{test.normalRanges || ""}</td>}
                           </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td>{test.mainTestName}</td>
-                          <td>
-                            <input
-                              type="text"
-                              value={results[`${testIndex}-0`] || ""}
-                              onChange={(e) =>
-                                handleResultChange(e, `${testIndex}-0`)
-                              }
-                            />
-                          </td>
-                          <td>{test.unit || ""}</td>
-                          <td>{test.normalRanges || ""}</td>
-                        </tr>
-                      )}
+                        )}
 
-                      {remarks && (
-                        <tr>
-                          <td>
-                            <b>Remarks</b>
-                          </td>
-                          <td colSpan="3">
-                            <textarea
-                              className="remarks-input"
-                              style={{ width: "100%" }}
-                            />
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            ))}
+                        {remarks && (
+                          <tr>
+                            <td>
+                              <b>Remarks</b>
+                            </td>
+                            <td colSpan={showUnitAndRanges ? "3" : "1"}>
+                              <textarea
+                                className="remarks-input"
+                                style={{ width: "100%" }}
+                              />
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
 

@@ -255,7 +255,8 @@ const BloodTest = () => {
                       style={{
                         width: "100%",
                         borderCollapse: "collapse",
-                        marginBottom: "20px",
+                        marginTop: "50px", 
+
                       }}
                     >
                       <thead>

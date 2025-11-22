@@ -174,7 +174,9 @@ const BloodTest = () => {
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
                   <tbody>
                     <tr>
-                      <td style={{ marginLeft: "100px", display: "flex" , border: "none"}}>
+                      <td style={{ textAlign: "center" ,   border: "none"}}>
+
+                        <div className="header-container" style={{display: "flex" , alignItems: "center" , justifyContent: "center" , textAlign: "center" , marginBottom: "30px"}}>
                         <div className="image-container">
                           <img src={Logo} style={{ width: "140px" }} />
                         </div>
@@ -185,6 +187,8 @@ const BloodTest = () => {
                             Al-Madina Clinic Sharjeel Medical Complex Near Moti
                             Masjid Kohat Cantt
                           </p>
+                        </div>
+
                         </div>
                       </td>
                     </tr>

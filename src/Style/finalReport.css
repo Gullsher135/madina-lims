@@ -121,5 +121,11 @@ thead, thead tr, thead th {
   border: none !important;
 }
 
+.bg{
+  background: rgb(236, 236, 236) !important;
+}
+.unbold{
+  font-weight: normal !important;
+}
 
 

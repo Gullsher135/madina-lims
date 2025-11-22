@@ -197,31 +197,32 @@ const BloodTest = () => {
                         >
                           <tbody>
                             <tr>
-                              <th>Patient Name</th>
-                              <td>{patientData.patient_name}</td>
-                              <th>Patient ID</th>
-                              <td>{patientData.id}</td>
+                              <th className="bg">Patient Name</th>
+                              <td className="unbold">{patientData.patient_name}</td>
+                              <th className="bg">Patient ID</th>
+                              <td className="unbold">{patientData.id}</td>
                             </tr>
                             <tr>
-                              <th>Age</th>
-                              <td>{patientData.patient_age}</td>
-                              <th>Sex</th>
-                              <td>{patientData.gender}</td>
+                              <th className="bg">Age</th>
+                              <td className="unbold">{patientData.patient_age}</td>
+                              <th className="bg">Sex</th>
+                              <td className="unbold">{patientData.gender}</td>
                             </tr>
                             <tr>
-                              <th>Referred By</th>
-                              <td>{patientData.referred_by}</td>
-                              <th>Date</th>
-                              <td>{currentDate}</td>
+                              <th className="bg">Referred By</th>
+                              <td className="unbold">{patientData.referred_by}</td>
+                              <th className="bg">Date</th>
+                              <td className="unbold">{currentDate}</td>
                             </tr>
                             <tr>
-                              <th>Investigations</th>
+                              <th className="bg">Investigations</th>
                               <td
                                 colSpan="3"
                                 style={{
                                   whiteSpace: "normal",
                                   wordBreak: "break-word",
                                 }}
+                                className="unbold"
                               >
                                 {tests.map((t) => t.mainTestName).join(", ")}
                               </td>

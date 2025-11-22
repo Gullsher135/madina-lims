@@ -47,9 +47,9 @@
   vertical-align: top;
 }
 
-.patient-info-table th {
+/* .patient-info-table th {
   background-color: #f2f2f2;
-}
+} */
 
 .investigations-table {
   width: 100%;
@@ -111,3 +111,15 @@
     width: 100% !important;
   }
 }
+
+thead, thead tr, thead th {
+  background: none !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.patient-info-tr{
+  border: none !important;
+}
+
+
+

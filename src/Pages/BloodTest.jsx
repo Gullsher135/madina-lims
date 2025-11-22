@@ -116,24 +116,24 @@ const BloodTest = () => {
       }
       groups[examType].push(subTest);
     });
-    
+
     // Return groups in specific order: Physical → Chemical → Microscopic → others
     const orderedGroups = {};
-    const order = ['physical', 'chemical', 'microscopic'];
-    
-    order.forEach(examType => {
+    const order = ["physical", "chemical", "microscopic"];
+
+    order.forEach((examType) => {
       if (groups[examType]) {
         orderedGroups[examType] = groups[examType];
       }
     });
-    
+
     // Add any other exam types that weren't in the specified order
-    Object.keys(groups).forEach(examType => {
+    Object.keys(groups).forEach((examType) => {
       if (!order.includes(examType)) {
         orderedGroups[examType] = groups[examType];
       }
     });
-    
+
     return orderedGroups;
   };
 
@@ -170,81 +170,81 @@ const BloodTest = () => {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr>
-              <td>
-                <div className="print-header">
-                  <div className="logo-container">
-                    <img src={Logo} alt="Logo" />
-                  </div>
-                  <div className="text-container ms-3">
-                    <h1>Al-MADINA LABORATORY</h1>
-                    <p>
-                      Al-Madina Clinic Sharjeel Medical Complex Near Moti Masjid
-                      Kohat Cantt
-                    </p>
-                  </div>
-                </div>
+              <th colSpan="4" style={{ padding: 0 }}>
+                <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                  <tbody>
+                    <tr>
+                      <td style={{ marginLeft: "100px", display: "flex" , border: "none"}}>
+                        <div className="image-container">
+                          <img src={Logo} style={{ width: "140px" }} />
+                        </div>
 
-                <div
-                  className="patient-info"
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    marginTop: "20px",
-                  }}
-                >
-                  <table
-                    className="patient-info-table"
-                    style={{ width: "100%", borderCollapse: "collapse" }}
-                  >
-                    <tbody>
-                      <tr>
-                        <th>Patient Name</th>
-                        <td>{patientData.patient_name}</td>
-                        <th>Patient ID</th>
-                        <td>{patientData.id}</td>
-                      </tr>
-                      <tr>
-                        <th>Age</th>
-                        <td>{patientData.patient_age}</td>
-                        <th>Sex</th>
-                        <td>{patientData.gender}</td>
-                      </tr>
-                      <tr>
-                        <th>Referred By</th>
-                        <td>{patientData.referred_by}</td>
-                        <th>Date</th>
-                        <td>{currentDate}</td>
-                      </tr>
-                      <tr>
-                        <th
-                          style={{ verticalAlign: "top", whiteSpace: "nowrap" }}
+                        <div className="text-container">
+                          <h1>Al-MADINA LABORATORY</h1>
+                          <p>
+                            Al-Madina Clinic Sharjeel Medical Complex Near Moti
+                            Masjid Kohat Cantt
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr style={{border: "none"}} className="patient-info-tr">
+                      <td style={{border: "none"}}>
+                        <table
+                          className="patient-info-table"
+                          style={{ width: "80%", borderCollapse: "collapse" , marginLeft: "110px"}}
                         >
-                          Investigations
-                        </th>
-                        <td
-                          colSpan={3}
-                          style={{
-                            whiteSpace: "normal",
-                            wordBreak: "break-word",
-                            lineHeight: "1.4",
-                          }}
-                        >
-                          {tests.map((t) => t.mainTestName).join(", ")}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </td>
+                          <tbody>
+                            <tr>
+                              <th>Patient Name</th>
+                              <td>{patientData.patient_name}</td>
+                              <th>Patient ID</th>
+                              <td>{patientData.id}</td>
+                            </tr>
+                            <tr>
+                              <th>Age</th>
+                              <td>{patientData.patient_age}</td>
+                              <th>Sex</th>
+                              <td>{patientData.gender}</td>
+                            </tr>
+                            <tr>
+                              <th>Referred By</th>
+                              <td>{patientData.referred_by}</td>
+                              <th>Date</th>
+                              <td>{currentDate}</td>
+                            </tr>
+                            <tr>
+                              <th>Investigations</th>
+                              <td
+                                colSpan="3"
+                                style={{
+                                  whiteSpace: "normal",
+                                  wordBreak: "break-word",
+                                }}
+                              >
+                                {tests.map((t) => t.mainTestName).join(", ")}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </th>
             </tr>
           </thead>
 
           <tbody>
             {tests.map((test, testIndex) => {
               const showUnitAndRanges = shouldShowUnitAndRanges(test);
-              const isPhysicalTemplate = test.subTests && test.subTests.some(
-                subTest => subTest.examType && subTest.examType !== "general"
-              );
+              const isPhysicalTemplate =
+                test.subTests &&
+                test.subTests.some(
+                  (subTest) =>
+                    subTest.examType && subTest.examType !== "general"
+                );
 
               return (
                 <tr key={testIndex}>
@@ -259,8 +259,8 @@ const BloodTest = () => {
                     >
                       <thead>
                         <tr>
-                          <th 
-                            colSpan={showUnitAndRanges ? "4" : "2"} 
+                          <th
+                            colSpan={showUnitAndRanges ? "4" : "2"}
                             className="test-header"
                           >
                             {test.mainTestName}
@@ -276,22 +276,25 @@ const BloodTest = () => {
                       <tbody>
                         {/* Physical Template with examType grouping */}
                         {isPhysicalTemplate ? (
-                          Object.entries(groupTestsByExamType(test.subTests)).map(([examType, subTestsInGroup]) => (
+                          Object.entries(
+                            groupTestsByExamType(test.subTests)
+                          ).map(([examType, subTestsInGroup]) => (
                             <React.Fragment key={examType}>
                               <tr>
-                                <td 
-                                  colSpan={showUnitAndRanges ? "4" : "2"} 
-                                  style={{ 
-                                    fontWeight: "bold", 
+                                <td
+                                  colSpan={showUnitAndRanges ? "4" : "2"}
+                                  style={{
+                                    fontWeight: "bold",
                                     backgroundColor: "#f5f5f5",
-                                    padding: "8px"
+                                    padding: "8px",
                                   }}
                                 >
                                   {examType.toUpperCase()} EXAMINATION
                                 </td>
                               </tr>
                               {subTestsInGroup.map((item, subIndex) => {
-                                const originalIndex = test.subTests.indexOf(item);
+                                const originalIndex =
+                                  test.subTests.indexOf(item);
                                 const key = `${testIndex}-${originalIndex}`;
                                 return (
                                   <tr key={key}>
@@ -300,11 +303,17 @@ const BloodTest = () => {
                                       <input
                                         type="text"
                                         value={results[key] || ""}
-                                        onChange={(e) => handleResultChange(e, key)}
+                                        onChange={(e) =>
+                                          handleResultChange(e, key)
+                                        }
                                       />
                                     </td>
-                                    {showUnitAndRanges && <td>{item.testUnit || ""}</td>}
-                                    {showUnitAndRanges && <td>{item.testNormalRanges || ""}</td>}
+                                    {showUnitAndRanges && (
+                                      <td>{item.testUnit || ""}</td>
+                                    )}
+                                    {showUnitAndRanges && (
+                                      <td>{item.testNormalRanges || ""}</td>
+                                    )}
                                   </tr>
                                 );
                               })}
@@ -324,8 +333,12 @@ const BloodTest = () => {
                                     onChange={(e) => handleResultChange(e, key)}
                                   />
                                 </td>
-                                {showUnitAndRanges && <td>{item.testUnit || ""}</td>}
-                                {showUnitAndRanges && <td>{item.testNormalRanges || ""}</td>}
+                                {showUnitAndRanges && (
+                                  <td>{item.testUnit || ""}</td>
+                                )}
+                                {showUnitAndRanges && (
+                                  <td>{item.testNormalRanges || ""}</td>
+                                )}
                               </tr>
                             );
                           })
@@ -348,8 +361,12 @@ const BloodTest = () => {
                                   }
                                 />
                               </td>
-                              {showUnitAndRanges && <td>{test.unit?.[subIndex] || ""}</td>}
-                              {showUnitAndRanges && <td>{test.normalRanges?.[subIndex] || ""}</td>}
+                              {showUnitAndRanges && (
+                                <td>{test.unit?.[subIndex] || ""}</td>
+                              )}
+                              {showUnitAndRanges && (
+                                <td>{test.normalRanges?.[subIndex] || ""}</td>
+                              )}
                             </tr>
                           ))
                         ) : (
@@ -366,7 +383,9 @@ const BloodTest = () => {
                               />
                             </td>
                             {showUnitAndRanges && <td>{test.unit || ""}</td>}
-                            {showUnitAndRanges && <td>{test.normalRanges || ""}</td>}
+                            {showUnitAndRanges && (
+                              <td>{test.normalRanges || ""}</td>
+                            )}
                           </tr>
                         )}
 
@@ -391,10 +410,6 @@ const BloodTest = () => {
             })}
           </tbody>
         </table>
-
-        <h6 className="text-center mt-5">
-          Al-Madina Clinic Sharjeel Medical Complex Near Moti Masjid Kohat Cantt
-        </h6>
       </div>
     </div>
   );
